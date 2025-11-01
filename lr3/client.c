@@ -73,20 +73,20 @@ int main(int argc, char *argv[]) {
 
     int shm_fd = shm_open(shm_name, O_RDWR, 0);
     if (shm_fd == -1) {
-        write_str(STDERR_FILENO, "error: failed to open SHM\n");
+        write_str(STDERR_FILENO, "ошибка: не удалось открыть SHM\n");
         exit(EXIT_FAILURE);
     }
 
     char *shm_buf = mmap(NULL, SHM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
     if (shm_buf == MAP_FAILED) {
-        write_str(STDERR_FILENO, "error: failed to map SHM\n");
+        write_str(STDERR_FILENO, "ошибка: не удалось сопоставить SHM\n");
         close(shm_fd);
         exit(EXIT_FAILURE);
     }
 
     sem_t *sem = sem_open(sem_name, O_RDWR);
     if (sem == SEM_FAILED) {
-        write_str(STDERR_FILENO, "error: failed to open semaphore\n");
+        write_str(STDERR_FILENO, "ошибка: не удалось открыть семафор\n");
         munmap(shm_buf, SHM_SIZE);
         close(shm_fd);
         exit(EXIT_FAILURE);
