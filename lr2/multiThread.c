@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <sys/time.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct {
     double real;
@@ -259,7 +260,7 @@ int main(int argc, char **argv) {
         printf("  - Многопоточное выполнение (pthreads)\n");
         printf("  - Блочное распределение работы\n");
     }
-        
+
     matrix_free(A, n);
     matrix_free(B, n);
     matrix_free(C_seq, n);
